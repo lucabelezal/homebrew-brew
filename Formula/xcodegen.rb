@@ -1,7 +1,7 @@
 # Documentation: https://docs.brew.sh/Formula-Cookbook
 #                https://rubydoc.brew.sh/Formula
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
-class Xcodegen < Formula
+class XcodeGen < Formula
   desc ""
   homepage ""
   url "https://github.com/yonaskolb/XcodeGen/archive/refs/tags/2.33.0.tar.gz"
