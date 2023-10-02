@@ -1,33 +1,33 @@
-# Documentation: https://docs.brew.sh/Formula-Cookbook
-#                https://rubydoc.brew.sh/Formula
-# PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
 class Swiftlint < Formula
-  desc ""
-  homepage ""
-  url "https://github.com/realm/SwiftLint/archive/refs/tags/0.42.0.tar.gz"
-  sha256 "48f857739732048afb968c2b2eeee4400aa9da21e543e67a0a87d87cd98dad6e"
-  license ""
+  desc "Tool to enforce Swift style and conventions"
+  homepage "https://github.com/realm/SwiftLint"
+  url "https://github.com/realm/SwiftLint.git",
+      tag:      "0.42.0",
+      revision: "d53fc2664df92ef322bfa9ce5238d34f1461526a"
+  license "MIT"
+  head "https://github.com/realm/SwiftLint.git"
 
-  # depends_on "cmake" => :build
+  bottle do
+    cellar :any_skip_relocation
+    sha256 "ea458356bba88a0fd9f74e4c4676663ffc43b648138dd7d537ecba2ced7cf85a" => :big_sur
+    sha256 "3e6cbf8f6968fd1f5f08f602ae4feb3df4d42eda57b33395f0599fbb6a707b1e" => :catalina
+    sha256 "0f5a693a08771785c53265863fe234823e5819032bf0971207b0b205d357a464" => :mojave
+  end
+
+  depends_on xcode: ["11.4", :build]
+  depends_on xcode: "8.0"
 
   def install
-    # ENV.deparallelize  # if your formula fails when building in parallel
-    # Remove unrecognized options if warned by configure
-    # https://rubydoc.brew.sh/Formula.html#std_configure_args-instance_method
-    system "./configure", *std_configure_args, "--disable-silent-rules"
-    # system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    system "swift", "build", "--disable-sandbox", "--configuration", "release"
+    bin.install ".build/release/swiftlint"
   end
 
   test do
-    # `test do` will create, run in and delete a temporary directory.
-    #
-    # This test will fail and we won't accept that! For Homebrew/homebrew-core
-    # this will need to be a test that verifies the functionality of the
-    # software. Run the test with `brew test swiftlint`. Options passed
-    # to `brew install` such as `--HEAD` also need to be provided to `brew test`.
-    #
-    # The installed folder is not in the path, so use the entire path to any
-    # executables being tested: `system "#{bin}/program", "do", "something"`.
-    system "false"
+    (testpath/"Test.swift").write "import Foundation"
+    assert_match "Test.swift:1:1: warning: Trailing Newline Violation: " \
+                 "Files should have a single trailing newline. (trailing_newline)",
+      shell_output("SWIFTLINT_SWIFT_VERSION=3 SWIFTLINT_DISABLE_SOURCEKIT=1 #{bin}/swiftlint lint --no-cache").chomp
+    assert_match version.to_s,
+      shell_output("#{bin}/swiftlint version").chomp
   end
 end

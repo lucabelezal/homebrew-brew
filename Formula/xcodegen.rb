@@ -1,33 +1,41 @@
-# Documentation: https://docs.brew.sh/Formula-Cookbook
-#                https://rubydoc.brew.sh/Formula
-# PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
 class Xcodegen < Formula
-  desc ""
-  homepage ""
-  url "https://github.com/yonaskolb/XcodeGen/archive/refs/tags/2.33.0.tar.gz"
-  sha256 "e05107f779c206cbacba0f2038f98cd1dc5cdc895324a76daec4b5168f119934"
-  license ""
+  desc "Generate your Xcode project from a spec file and your folder structure"
+  homepage "https://github.com/yonaskolb/XcodeGen"
+  url "https://github.com/yonaskolb/XcodeGen/archive/2.18.0.tar.gz"
+  sha256 "1b14e338d3005a716d856352ae012b30f67632e232601ac0890619377ae481bd"
+  license "MIT"
+  head "https://github.com/yonaskolb/XcodeGen.git"
 
-  # depends_on "cmake" => :build
+  bottle do
+    cellar :any_skip_relocation
+    sha256 "954d8df6e5e76c59471482dce21df05bed22382e30d1b5cc9bfa6e024508106c" => :big_sur
+    sha256 "72a74170b8b457db6bce90da3daaa6520a24bef3d46d4dfbfd3599bfe45a8b5b" => :catalina
+    sha256 "1d64fc7e6f3ade59a08eb9b9105c3b1d20d8d9cb4b4de2539590733fd203e014" => :mojave
+  end
+
+  depends_on xcode: ["10.2", :build]
 
   def install
-    # ENV.deparallelize  # if your formula fails when building in parallel
-    # Remove unrecognized options if warned by configure
-    # https://rubydoc.brew.sh/Formula.html#std_configure_args-instance_method
-    system "./configure", *std_configure_args, "--disable-silent-rules"
-    # system "cmake", "-S", ".", "-B", "build", *std_cmake_args
+    system "make", "install", "PREFIX=#{prefix}"
   end
 
   test do
-    # `test do` will create, run in and delete a temporary directory.
-    #
-    # This test will fail and we won't accept that! For Homebrew/homebrew-core
-    # this will need to be a test that verifies the functionality of the
-    # software. Run the test with `brew test xcodegen`. Options passed
-    # to `brew install` such as `--HEAD` also need to be provided to `brew test`.
-    #
-    # The installed folder is not in the path, so use the entire path to any
-    # executables being tested: `system "#{bin}/program", "do", "something"`.
-    system "false"
+    (testpath/"xcodegen.yml").write <<~EOS
+      name: GeneratedProject
+      options:
+        bundleIdPrefix: com.project
+      targets:
+        TestProject:
+          type: application
+          platform: iOS
+          sources: TestProject
+    EOS
+    (testpath/"TestProject").mkpath
+    system bin/"XcodeGen", "--spec", testpath/"xcodegen.yml"
+    assert_predicate testpath/"GeneratedProject.xcodeproj", :exist?
+    assert_predicate testpath/"GeneratedProject.xcodeproj/project.pbxproj", :exist?
+    output = (testpath/"GeneratedProject.xcodeproj/project.pbxproj").read
+    assert_match "name = TestProject", output
+    assert_match "isa = PBXNativeTarget", output
   end
 end

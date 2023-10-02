@@ -1,6 +1,8 @@
 https://publishing-project.rivendellweb.net/creating-and-running-your-own-homebrew-tap/
 
 
+https://github.com/jpsim/homebrew-core/tree/96e4ed7cadc86e20cd2c7edc5ca32b3b46fbf215/Formula
+
 # Versões de dezembro de 2020 - Xcode 12
 
 brew create --tap lucabelezal/tap \
