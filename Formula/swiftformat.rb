@@ -1,7 +1,7 @@
 # Documentation: https://docs.brew.sh/Formula-Cookbook
 #                https://rubydoc.brew.sh/Formula
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
-class SwiftFormat < Formula
+class Swiftformat < Formula
   desc ""
   homepage ""
   url "https://github.com/nicklockwood/SwiftFormat/archive/refs/tags/0.47.10.tar.gz"

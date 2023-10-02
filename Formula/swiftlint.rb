@@ -1,7 +1,7 @@
 # Documentation: https://docs.brew.sh/Formula-Cookbook
 #                https://rubydoc.brew.sh/Formula
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
-class SwiftLint < Formula
+class Swiftlint < Formula
   desc ""
   homepage ""
   url "https://github.com/realm/SwiftLint/archive/refs/tags/0.42.0.tar.gz"

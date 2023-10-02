@@ -1,7 +1,7 @@
 # Documentation: https://docs.brew.sh/Formula-Cookbook
 #                https://rubydoc.brew.sh/Formula
 # PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
-class SwiftGen < Formula
+class Swiftgen < Formula
   desc ""
   homepage ""
   url "https://github.com/SwiftGen/SwiftGen/archive/refs/tags/6.3.0.tar.gz"
