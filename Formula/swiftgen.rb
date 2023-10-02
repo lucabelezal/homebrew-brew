@@ -2,8 +2,8 @@ class Swiftgen < Formula
   desc "Swift code generator for assets, storyboards, Localizable.strings, …"
   homepage "https://github.com/SwiftGen/SwiftGen"
   url "https://github.com/SwiftGen/SwiftGen.git",
-      tag:      "6.4.0",
-      revision: "0c67b63f43814a8d7eb71f685f0bf504b03223f3"
+      tag:      "6.3.0",
+      revision: "676f9407910e7becedbbc5f76955b09f65d72120bb17794994439ecf0afe4cbe"
   license "MIT"
   head "https://github.com/SwiftGen/SwiftGen.git", branch: "develop"
 

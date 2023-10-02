@@ -3,7 +3,7 @@ class Swiftlint < Formula
   homepage "https://github.com/realm/SwiftLint"
   url "https://github.com/realm/SwiftLint.git",
       tag:      "0.42.0",
-      revision: "d53fc2664df92ef322bfa9ce5238d34f1461526a"
+      revision: "48f857739732048afb968c2b2eeee4400aa9da21e543e67a0a87d87cd98dad6e"
   license "MIT"
   head "https://github.com/realm/SwiftLint.git"
 
