@@ -3,7 +3,7 @@ class Swiftgen < Formula
   homepage "https://github.com/SwiftGen/SwiftGen"
   url "https://github.com/SwiftGen/SwiftGen.git",
       tag:      "6.3.0",
-      revision: "676f9407910e7becedbbc5f76955b09f65d72120bb17794994439ecf0afe4cbe"
+      revision: "f79fa84e7088cdcadf43c69cd1f4e96d996ce171"
   license "MIT"
   head "https://github.com/SwiftGen/SwiftGen.git", branch: "develop"
 
