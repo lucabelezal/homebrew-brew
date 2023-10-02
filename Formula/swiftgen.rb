@@ -7,11 +7,11 @@ class Swiftgen < Formula
   license "MIT"
   head "https://github.com/SwiftGen/SwiftGen.git", branch: "develop"
 
-  bottle do
-    cellar :any
-    sha256 "338165c7d38fa699a84115b5dbd5881e5f8d18b194ba9c139f05b96c5bf807f8" => :big_sur
-    sha256 "cdc09fffadaf11a05b19563d0e733d81f467b228571096bc5c32191087fd6074" => :catalina
-  end
+  # bottle do
+  #   cellar :any
+  #   sha256 "338165c7d38fa699a84115b5dbd5881e5f8d18b194ba9c139f05b96c5bf807f8" => :big_sur
+  #   sha256 "cdc09fffadaf11a05b19563d0e733d81f467b228571096bc5c32191087fd6074" => :catalina
+  # end
 
   depends_on "ruby" => :build if MacOS.version <= :sierra
   depends_on xcode: ["12.0", :build]
